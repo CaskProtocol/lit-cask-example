@@ -40,7 +40,7 @@ function accessControlConditions() {
         {operator: "or"},
         // {
         //     conditionType: "evmBasic",
-        //     contractAddress: '0x921ec72BEf414D75F0C6fFee37975BB3ae80d41C',
+        //     contractAddress: process.env.CASK_SUBSCRIPTIONS_CONTRACT,
         //     standardContractType: 'CASK',
         //     chain,
         //     method: 'getActiveSubscriptionCount',
@@ -56,7 +56,7 @@ function accessControlConditions() {
         // },
         {
             conditionType: "evmContract",
-            contractAddress: '0x921ec72BEf414D75F0C6fFee37975BB3ae80d41C',
+            contractAddress: process.env.CASK_SUBSCRIPTIONS_CONTRACT,
             chain,
             functionName: 'getActiveSubscriptionCount',
             functionParams: [
