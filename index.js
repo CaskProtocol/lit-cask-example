@@ -131,7 +131,7 @@ async function encrypt() {
 async function decryptAsConsumer() {
     console.log(`DECRYPTING AS CONSUMER...`);
 
-    const restoreAuthSigProvider = {
+    const restoreAuthSigConsumer = {
         sig: await consumer.signMessage(signedMessage),
         derivedVia: "web3.eth.personal.sign",
         signedMessage: signedMessage,
@@ -142,7 +142,7 @@ async function decryptAsConsumer() {
         unifiedAccessControlConditions: accessControlConditions(),
         toDecrypt: saveEncryptedSymmetricKey.substring(2), // strip leading '0x'
         chain,
-        authSig: restoreAuthSigProvider,
+        authSig: restoreAuthSigConsumer,
     });
 
     const decryptedString = await LitSDK.decryptString(
