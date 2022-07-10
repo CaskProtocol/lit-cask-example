@@ -38,63 +38,18 @@ function accessControlConditions() {
             },
         },
         {operator: "or"},
-        // {
-        //     conditionType: "evmBasic",
-        //     contractAddress: process.env.CASK_SUBSCRIPTIONS_CONTRACT,
-        //     standardContractType: 'CASK',
-        //     chain,
-        //     method: 'getActiveSubscriptionCount',
-        //     parameters: [
-        //         ':userAddress',
-        //         provider.address,
-        //         planId
-        //     ],
-        //     returnValueTest: {
-        //         comparator: '>',
-        //         value: '0'
-        //     }
-        // },
         {
-            conditionType: "evmContract",
+            conditionType: "evmBasic",
             contractAddress: process.env.CASK_SUBSCRIPTIONS_CONTRACT,
+            standardContractType: 'CASK',
             chain,
-            functionName: 'getActiveSubscriptionCount',
-            functionParams: [
+            method: 'getActiveSubscriptionCount',
+            parameters: [
                 ':userAddress',
                 provider.address,
                 planId
             ],
-            functionAbi: {
-                "inputs": [
-                    {
-                        "internalType": "address",
-                        "name": "_consumer",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "_provider",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint32",
-                        "name": "_planId",
-                        "type": "uint32"
-                    }
-                ],
-                "name": "getActiveSubscriptionCount",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
             returnValueTest: {
-                key: "",
                 comparator: '>',
                 value: '0'
             }
