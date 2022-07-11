@@ -1,6 +1,7 @@
 require('dotenv').config();
 const ethers = require('ethers');
 const LitSDK = require("lit-js-sdk/build/index.node.js")
+const {CaskSDK} = require("@caskprotocol/sdk");
 
 const lit = new LitSDK.LitNodeClient({
     alertWhenUnauthorized: false,
@@ -16,6 +17,9 @@ const signedMessage = "Cask Protocol Example";
 
 const planId = '100';
 const secretMessage = "this is a super secret message";
+
+const caskEnv = process.env.CASK_ENV || CaskSDK.environments.TESTNET;
+const caskChain = Object.values(CaskSDK.chains).find((c) => c.litName === chain || c.shortName === chain);
 
 
 // globals to simulate persisting the encrypted string and key
@@ -40,7 +44,7 @@ function accessControlConditions() {
         {operator: "or"},
         {
             conditionType: "evmBasic",
-            contractAddress: process.env.CASK_SUBSCRIPTIONS_CONTRACT,
+            contractAddress: CaskSDK.deployments.CaskSubscriptions[caskEnv][caskChain.chainId],
             standardContractType: 'CASK',
             chain,
             method: 'getActiveSubscriptionCount',
